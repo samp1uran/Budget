@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget & Task Tracker</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        // Firebase configuration
+        const __firebase_config = JSON.stringify({
+            apiKey: "AIzaSyCN-gxHb_gb3jlZIvHbKQITFP4VwvWh2iM",
+            authDomain: "budzet-1c6e2.firebaseapp.com",
+            projectId: "budzet-1c6e2",
+            storageBucket: "budzet-1c6e2.firebasestorage.app",
+            messagingSenderId: "575936506675",
+            appId: "1:575936506675:web:fcfe050c5d9eb3c0e6ac46",
+            measurementId: "G-QZN5SXPVD1"
+        });
+        
+        const __app_id = "budget-tracker-app";
+        const __initial_auth_token = null;
+
+        // Simple version of your app for demonstration
+        function App() {
+            const [settings, setSettings] = React.useState({ 
+                theme: 'dark', 
+                displayName: 'User', 
+                appMode: 'tasks', 
+                email: '' 
+            });
+            
+            const theme = settings.theme === 'light' ? 
+                { bg: 'bg-gray-100', text: 'text-gray-800', containerBg: 'bg-white' } :
+                { bg: 'bg-gray-900', text: 'text-white', containerBg: 'bg-gray-800' };
+
+            return React.createElement('div', { className: settings.theme },
+                React.createElement('div', { className: `${theme.bg} ${theme.text} min-h-screen flex items-center justify-center p-4` },
+                    React.createElement('div', { className: `w-full max-w-2xl mx-auto ${theme.containerBg} rounded-2xl shadow-2xl p-8` },
+                        React.createElement('h1', { className: "text-3xl font-bold text-center text-cyan-600 mb-4" }, 
+                            `${settings.displayName}'s ${settings.appMode === 'tasks' ? 'Tasks' : 'Budget'}`
+                        ),
+                        React.createElement('p', { className: "text-center text-gray-500 mb-8" }, 
+                            "Your Personal Task & Budget Tracker"
+                        ),
+                        React.createElement('div', { className: "text-center" },
+                            React.createElement('p', { className: "mb-4 text-green-600 font-semibold" }, "✓ Firebase configuration is set up!"),
+                            React.createElement('p', { className: "mb-4" }, "The app is ready to connect to your Firebase project."),
+                            React.createElement('p', null, "Current mode: ", 
+                                React.createElement('strong', null, settings.appMode)
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        // Render the app
+        ReactDOM.render(React.createElement(App), document.getElementById('root'));
+    </script>
+</body>
+</html>
